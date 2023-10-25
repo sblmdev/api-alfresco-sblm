@@ -1,0 +1,7 @@
+pe\gob\sblm\api\alfresco\constant\Constant.class
+pe\gob\sblm\api\alfresco\session\SessionPJCM.class
+pe\gob\sblm\api\alfresco\manager\defaults\CMISManagerImpl.class
+pe\gob\sblm\api\alfresco\manager\FileProperties.class
+pe\gob\sblm\api\alfresco\repository\Repository.class
+pe\gob\sblm\api\alfresco\manager\CMISManager.class
+pe\gob\sblm\api\alfresco\manager\CMISManagerBuilder.class

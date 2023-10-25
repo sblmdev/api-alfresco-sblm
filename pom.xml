@@ -1,0 +1,152 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>pe.gob.sblm.api.alfresco</groupId>
+	<artifactId>api-alfresco-sblm</artifactId>
+
+	<packaging>jar</packaging>
+	<version>1.0</version>
+
+	<name>api-alfresco-sblm</name>
+	<url>http://maven.apache.org</url>
+
+	<organization>
+		<name>sblm</name>
+		<url>http://www.sblm.gob.pe</url>
+	</organization>
+	<licenses>
+		<license>
+			<name>SGDSI Software License, Version 1.0</name>
+			<url>http://www.sblm.gob.pe</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>cvallejos</id>
+			<name>Cindy Vallejos</name>
+			<email>sistemasgi@sblm.gob.pe</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.version>4.11</junit.version>
+		<java.version>1.7</java.version>
+		
+		<org.alfresco.cmis.client.version>1.0</org.alfresco.cmis.client.version>
+		<org.apache.chemistry.opencmis.version>1.0.0</org.apache.chemistry.opencmis.version>
+
+		<org.maven.compiler.plugin.version>3.0</org.maven.compiler.plugin.version>
+		<org.maven.surefire.plugin.version>2.12</org.maven.surefire.plugin.version>
+		<org.maven.jar.plugin.version>2.4</org.maven.jar.plugin.version>
+		<org.maven.eclipse.plugin.version>2.9</org.maven.eclipse.plugin.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>alfresco-public</id>
+			<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- Alfresco -->
+		<dependency>
+			<groupId>org.alfresco.cmis.client</groupId>
+			<artifactId>alfresco-opencmis-extension</artifactId>
+			<version>${org.alfresco.cmis.client.version}</version>
+		</dependency>
+		<!-- OpenCmis -->
+		<dependency>
+			<groupId>org.apache.chemistry.opencmis</groupId>
+			<artifactId>chemistry-opencmis-client-api</artifactId>
+			<version>${org.apache.chemistry.opencmis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.chemistry.opencmis</groupId>
+			<artifactId>chemistry-opencmis-client-bindings</artifactId>
+			<version>${org.apache.chemistry.opencmis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.chemistry.opencmis</groupId>
+			<artifactId>chemistry-opencmis-client-impl</artifactId>
+			<version>${org.apache.chemistry.opencmis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.chemistry.opencmis</groupId>
+			<artifactId>chemistry-opencmis-commons-api</artifactId>
+			<version>${org.apache.chemistry.opencmis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.chemistry.opencmis</groupId>
+			<artifactId>chemistry-opencmis-commons-impl</artifactId>
+			<version>${org.apache.chemistry.opencmis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>pe.gob.sblm.api.commons</groupId>
+			<artifactId>api-commons-sblm</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${org.maven.compiler.plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${org.maven.eclipse.plugin.version}</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
+
+			<!-- JUnit ignore environment variable MAVEN_OPTS, you must use SUREFIRE-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${org.maven.surefire.plugin.version}</version>
+				<configuration>
+					<forkMode>pertest</forkMode>
+					<argLine>-Xms1024m -Xmx1024m</argLine>
+					<testFailureIgnore>false</testFailureIgnore>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${org.maven.jar.plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<!-- don't know if this is needed -->
+							<classpathPrefix>lib/</classpathPrefix>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<description>Api que encapsula los pincipales servicios ALFRESCO</description>
+</project>
